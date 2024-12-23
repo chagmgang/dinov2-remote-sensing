@@ -26,7 +26,7 @@ deepspeed --include localhost:0,1,2,3... train_v2.py
 ## Pretrained Model on Huggingface
 | Model | Total Params | Student Backbone Params | Student DINO Head Params | Student iBOT Head Params | Weight & Config | Logs |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-Small/16 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing) | logs[https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing/tensorboard] |
+| ViT-Small/16 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing/tensorboard) |
 
 ---
 
