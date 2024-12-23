@@ -55,6 +55,6 @@ deepspeed --include localhost:0,1,2,3... train_v2.py
 
 ## Property Analysis
 
+* Feature Mapping - [feature_mapping.ipynb](/notebook/feature_mapping.ipynd)
 * K-NN
-* Feature-Mapping
-* 
+* Sparse Feature Matching
