@@ -50,3 +50,11 @@ deepspeed --include localhost:0,1,2,3... train_v2.py
 | `Cv-BrCT` | [AiRound and CV-BrCT: Novel Multi-View Datasets for Scene Classification](https://arxiv.org/abs/2008.01133) |
 | `AiRound`| [AiRound and CV-BrCT: Novel Multi-View Datasets for Scene Classification](https://arxiv.org/abs/2008.01133) |
 |`RSI-CB128` | [RSI-CB: A Large Scale Remote Sensing Image Classification Benchmark via Crowdsource Data](https://arxiv.org/abs/1705.10450) |
+
+---
+
+## Property Analysis
+
+* K-NN
+* Feature-Mapping
+* 
