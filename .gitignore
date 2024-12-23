@@ -1,5 +1,6 @@
+__pycache__/
+*.pyc
 checkpoint*/
 .ipynb_checkpoints/
 pics/
 *.egg-info/
-__pycache__/
