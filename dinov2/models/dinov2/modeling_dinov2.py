@@ -1172,4 +1172,3 @@ class DINOv2(ViTPretrainedModel):
                 patch_embed_lr_mult=self.config.patch_embed_lr_mult,
             )
         return all_params_groups
-
