@@ -35,6 +35,10 @@ deepspeed --include localhost:0,1,2,3... train_v2.py
 ### KNN Evaluation
 90% of the data is randomly selected as the training set while the 10% is selected as test set. The `k=20` is selected for evaluation with K-NN. The evaluation datasets are including below table.
 
+| Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ViT-Small/16 | | | | | | |
+
 | Dataset Name | Dataset Paper |
 | :-: | :-: |
 | `RESISC` | [Remote Sensing Image Scene Classification: Benchmark and State of the Art](https://arxiv.org/abs/1703.00121) |
