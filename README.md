@@ -49,18 +49,12 @@ The evaluation methods for DINOv2 are k-nn clustering and linear probing. 90% of
 ### Linear Probing Evaluation
 
 ```
+# train_textfile = linprob_data_lists/RESISC/train.txt
+# test_textfile = linprob_data_lists/RESISC/test.txt
 python3 evaluation/linprob.py --model-path {model_registry} \
                               --data-root {data_root} \
                               --train-text {train_textfile} \
                               --test-text {test_textfile}
-```
-
-Example for RESISC
-```
-python3 evaluation/linprob.py --model-path KevinCha/dinov2-vit-small-remote-sensing \
-                              --data-root {YOUR_RESISC_ROOT} \
-                              --train-text linprob_data_lists/RESISC/train.txt \
-                              --test-text linprob_data_lists/RESISC/test.txt
 ```
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
@@ -70,18 +64,12 @@ python3 evaluation/linprob.py --model-path KevinCha/dinov2-vit-small-remote-sens
 ### KNN Evaluation
 
 ```
+# train_textfile = linprob_data_lists/RESISC/train.txt
+# test_textfile = linprob_data_lists/RESISC/test.txt
 python3 evaluation/knn.py --model-path {model_registry} \
                               --data-root {data_root} \
                               --train-text {train_textfile} \
                               --test-text {test_textfile}
-```
-
-Example for RESISC
-```
-python3 evaluation/knn.py --model-path KevinCha/dinov2-vit-small-remote-sensing \
-                              --data-root {YOUR_RESISC_ROOT} \
-                              --train-text linprob_data_lists/RESISC/train.txt \
-                              --test-text linprob_data_lists/RESISC/test.txt
 ```
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
