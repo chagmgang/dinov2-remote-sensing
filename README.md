@@ -65,7 +65,7 @@ python3 evaluation/linprob.py --model-path KevinCha/dinov2-vit-small-remote-sens
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-S/16-e25 | | | | | | |
+| ViT-S/16-e25 | 94.381 | 96.237 | | | | |
 
 ### KNN Evaluation
 
@@ -86,7 +86,7 @@ python3 evaluation/knn.py --model-path KevinCha/dinov2-vit-small-remote-sensing 
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-S/16-e25 | | | | | | |
+| ViT-S/16-e25 | 93.365 | 89.785 | | | | |
 
 ---
 
