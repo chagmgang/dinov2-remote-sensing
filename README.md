@@ -1,4 +1,4 @@
-# Reimplementation Self-Supervised Vision Transformers for DINO v2 with Huggingface 
+# Reimplementation Self-Supervised Vision Transformers for DINO v2 with Huggingface 🤗
 ---
 * Pytorch implementation and pretrained models for DINO v2 in remote sensing.
 * See Official Paper and Github for information in detail.
