@@ -24,15 +24,15 @@ deepspeed --include localhost:0,1,2,3... train_v2.py
 
 ---
 ## Pretrained Model on Huggingface
-| Model | Total Params | Student Backbone Params | Student DINO Head Params | Student iBOT Head Params | Weight & Config | Logs |
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-Small/16 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing/tensorboard) |
+| Model | Epoch | Total Params | Student Backbone Params | Student DINO Head Params | Student iBOT Head Params | Weight & Config | Logs |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ViT-S/16 | 25 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing/tensorboard) |
 
 ---
 
 ## Evaluation
 
-90% of the data is randomly selected as the training set while the 10% is selected as test set. The `k=20` is selected for evaluation with K-NN. The evaluation datasets are including below table. The splited data is stored in [linprob_data_lists](/linprob_data_lists).
+The evaluation methods for DINOv2 are k-nn clustering and linear probing. 90% of the data is randomly selected as the training set while the 10% is selected as test set. The `k=20` is selected for evaluation with K-NN. The evaluation datasets are including below table. The splited data is stored in [linprob_data_lists](/linprob_data_lists).
 
 | Dataset Name | Dataset Paper |
 | :-: | :-: |
@@ -62,6 +62,10 @@ python3 evaluation/linprob.py --model-path KevinCha/dinov2-vit-small-remote-sens
                               --train-text linprob_data_lists/RESISC/train.txt \
                               --test-text linprob_data_lists/RESISC/test.txt
 ```
+
+| Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ViT-Small/16 | | | | | | |
 
 ### KNN Evaluation
 
