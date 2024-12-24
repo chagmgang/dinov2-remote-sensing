@@ -94,3 +94,5 @@ python3 evaluation/knn.py --model-path KevinCha/dinov2-vit-small-remote-sensing 
 
 * Feature Mapping - [feature_mapping.ipynb](/notebook/feature_mapping.ipynb)
 * Sparse Feature Matching - [vit-feature-matching.ipynb](/notebook/vit-feature-matching.ipynb)
+
+![sparse matching](/assets/sparse_matching.png)
