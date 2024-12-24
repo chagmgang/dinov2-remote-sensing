@@ -51,6 +51,7 @@ The evaluation methods for DINOv2 are k-nn clustering and linear probing. 90% of
 ```
 # train_textfile = linprob_data_lists/RESISC/train.txt
 # test_textfile = linprob_data_lists/RESISC/test.txt
+
 python3 evaluation/linprob.py --model-path {model_registry} \
                               --data-root {data_root} \
                               --train-text {train_textfile} \
@@ -59,13 +60,14 @@ python3 evaluation/linprob.py --model-path {model_registry} \
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-S/16-e25 | 94.381 | 96.237 | | | | |
+| ViT-S/16-e25 | 94.381 | 96.237 | 96.642 | | | |
 
 ### KNN Evaluation
 
 ```
 # train_textfile = linprob_data_lists/RESISC/train.txt
 # test_textfile = linprob_data_lists/RESISC/test.txt
+
 python3 evaluation/knn.py --model-path {model_registry} \
                               --data-root {data_root} \
                               --train-text {train_textfile} \
@@ -74,7 +76,7 @@ python3 evaluation/knn.py --model-path {model_registry} \
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-S/16-e25 | 93.365 | 89.785 | | | | |
+| ViT-S/16-e25 | 93.365 | 89.785 | 96.981 | | | |
 
 ---
 
