@@ -60,7 +60,7 @@ python3 evaluation/linprob.py --model-path {model_registry} \
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-S/16-e25 | 94.381 | 96.237 | 96.642 | | | |
+| ViT-S/16-e25 | 94.381 | 96.237 | 96.642 | 99.811 | 98.037 | 99.048 |
 
 ### KNN Evaluation
 
@@ -76,7 +76,7 @@ python3 evaluation/knn.py --model-path {model_registry} \
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-S/16-e25 | 93.365 | 89.785 | 96.981 | | | |
+| ViT-S/16-e25 | 93.365 | 89.785 | 96.981 | 97.196 | 95.741 | 87.143 |
 
 ---
 
