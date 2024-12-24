@@ -26,7 +26,7 @@ deepspeed --include localhost:0,1,2,3... train_v2.py
 ## Pretrained Model on Huggingface
 | Model | Epoch | Total Params | Student Backbone Params | Student DINO Head Params | Student iBOT Head Params | Weight & Config | Logs |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-S/16 | 25 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing/tensorboard) |
+| ViT-S/16-e25 | 25 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing/tensorboard) |
 
 ---
 
@@ -65,7 +65,7 @@ python3 evaluation/linprob.py --model-path KevinCha/dinov2-vit-small-remote-sens
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-Small/16 | | | | | | |
+| ViT-S/16-e25 | | | | | | |
 
 ### KNN Evaluation
 
@@ -86,7 +86,7 @@ python3 evaluation/knn.py --model-path KevinCha/dinov2-vit-small-remote-sensing 
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-Small/16 | | | | | | |
+| ViT-S/16-e25 | | | | | | |
 
 ---
 
