@@ -32,6 +32,23 @@ deepspeed --include localhost:0,1,2,3... train_v2.py
 
 ## Evaluation
 
+### Linear Probing Evaluation
+
+```
+python3 evaluation/linprob.py --model-path {model_registry} \
+                              --data-root {data_root} \
+                              --train-text {train_textfile} \
+                              --test-text {test_textfile}
+```
+
+Example for RESISC
+```
+python3 evaluation/linprob.py --model-path KevinCha/dinov2-vit-small-remote-sensing \
+                              --data-root {YOUR_RESISC_ROOT} \
+                              --train-text linprob_data_lists/RESISC/train.txt \
+                              --test-text linprob_data_lists/RESISC/test.txt
+```
+
 ### KNN Evaluation
 90% of the data is randomly selected as the training set while the 10% is selected as test set. The `k=20` is selected for evaluation with K-NN. The evaluation datasets are including below table.
 
@@ -56,5 +73,4 @@ deepspeed --include localhost:0,1,2,3... train_v2.py
 ## Property Analysis
 
 * Feature Mapping - [feature_mapping.ipynb](/notebook/feature_mapping.ipynb)
-* K-NN - [knn-cluter.ipynb](/notebook/knn-cluster.ipynb)
 * Sparse Feature Matching - [vit-feature-matching.ipynb](/notebook/vit-feature-matching.ipynb)
