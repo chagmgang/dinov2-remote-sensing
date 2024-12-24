@@ -98,4 +98,10 @@ python3 evaluation/knn.py --model-path KevinCha/dinov2-vit-small-remote-sensing 
 * Sparse Feature Matching - [vit-feature-matching.ipynb](/notebook/vit-feature-matching.ipynb)
 ![sparse matching](/assets/sparse_matching.png)
 * Image Retrieval - [index_search.ipynb](/notebook/index_search.ipynb)
-
+![index search1](/assets/1.png)
+![index search2](/assets/2.png)
+![index search3](/assets/3.png)
+![index search4](/assets/4.png)
+![index search5](/assets/5.png)
+![index search6](/assets/6.png)
+![index search7](/assets/7.png)
