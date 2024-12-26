@@ -1,0 +1,2 @@
+from .configuration_convvit_dinov2 import ConvViTDINOv2Config
+from .modeling_convvit_dinov2 import ConvDINOv1
