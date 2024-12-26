@@ -11,7 +11,7 @@
 
 This project use the deepspeed interface for multi gpu training
 ```
-deepspeed --include localhost:0,1,2,3... train_v2.py
+deepspeed --include localhost:0,1,2,3... vit_train.py
 ```
 ---
 ## Training Dataset for Remote Sensing
