@@ -13,6 +13,10 @@ This project use the deepspeed interface for multi gpu training
 ```
 deepspeed --include localhost:0,1,2,3... vit_train.py
 ```
+```
+deepspeed --include localhost:0,1,2,3... convvit_train.py
+```
+
 ---
 ## Training Dataset for Remote Sensing
 
@@ -27,6 +31,9 @@ deepspeed --include localhost:0,1,2,3... vit_train.py
 | Model | Epoch | Total Params | Student Backbone Params | Student DINO Head Params | Student iBOT Head Params | Weight & Config | Logs |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | ViT-S/16-e25 | 25 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing/tensorboard) |
+| ViT-S/16-e100 | 25 | 132M | 21M | 22M | 22M | | |
+| ViT-B/16-e25 | 25 |  |  |  |  | | |
+| ConvViT-S-e25 | 25 |  |  |  |  | | |
 
 ---
 

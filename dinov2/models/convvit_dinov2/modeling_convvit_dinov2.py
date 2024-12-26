@@ -113,7 +113,7 @@ class PatchEmbed(nn.Module):
 
     def forward(self, x):
         x = self.proj(x)
-        x = self.norm(x.permute(0, 2, 3, 1)).permute(0, 3, 1, 2)
+        x = self.norm(x.permute(0, 2, 3, 1).contiguous()).permute(0, 3, 1, 2).contiguous()
         return self.act(x)
         
 
@@ -157,7 +157,6 @@ class CBlock(nn.Module):
         self.conv1 = nn.Conv2d(dim, dim, 1)
         self.conv2 = nn.Conv2d(dim, dim, 1)
         self.attn = nn.Conv2d(dim, dim, 5, padding=2, groups=dim)
-        # self.attn = nn.Conv2d(dim, dim, 1)
 
         self.drop_path = DropPath(
             drop_path) if drop_path > 0. else nn.Identity()
@@ -169,14 +168,14 @@ class CBlock(nn.Module):
     def forward(self, x, mask=None):
         residual = x
         x = self.conv1(
-            self.norm1(x.permute(0, 2, 3, 1)).permute(0, 3, 1, 2))
+            self.norm1(x.permute(0, 2, 3, 1).contiguous()).permute(0, 3, 1, 2).contiguous())
         if mask is not None:
             x = self.attn(mask * x)
         else:
             x = self.attn(x)
         x = residual + self.drop_path(self.conv2(x))
         x = x + self.drop_path(
-            self.mlp(self.norm2(x.permute(0, 2, 3, 1)).permute(0, 3, 1, 2)))
+            self.mlp(self.norm2(x.permute(0, 2, 3, 1).contiguous()).permute(0, 3, 1, 2).contiguous()))
         return x
             
 
