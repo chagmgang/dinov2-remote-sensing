@@ -215,6 +215,21 @@ class Attention(nn.Module):
         x = self.proj_drop(x)
         return x
 
+    def get_attn(self, x):
+        B, N, C = x.shape
+        qkv = self.qkv(x).reshape(B, N, 3, self.num_heads,
+                                  C // self.num_heads).permute(2, 0, 3, 1, 4)
+        q, k, v = qkv[0], qkv[1], qkv[
+            2]  # make torchscript happy (cannot use tensor as tuple)
+
+        attn = (q @ k.transpose(-2, -1)) * self.scale
+        attn = attn.softmax(dim=-1)
+        attn = self.attn_drop(attn)
+
+        x = (attn @ v).transpose(1, 2).reshape(B, N, C)
+        x = self.proj(x)
+        x = self.proj_drop(x)
+        return x, attn
 
 class Mlp(nn.Module):
 
@@ -279,6 +294,18 @@ class Block(nn.Module):
         x = x + self.drop_path(self.mlp(self.norm2(x)))
         return x
 
+    def get_attention(self, x):
+
+        def get_residual_func(x):
+            x = self.norm1(x)
+            x, attn = self.attn.get_attn(x)
+            x = self.drop_path(x)
+            return x, attn
+
+        y, attn = get_residual_func(x)
+        x = x + y
+        x = x + self.drop_path(self.mlp(self.norm2(x)))
+        return x, attn
 
 @dataclass
 class ConvViTModelOutput(ModelOutput):
@@ -486,6 +513,31 @@ class ConvViT(ConvViTPretrainedModel):
             x_norm_regtokens=x_norm[:, 1 : self.num_register_tokens + 1],
             x_norm_patchtokens=x_norm[:, self.num_register_tokens + 1:],
             x_prenorm=x,
+        )
+
+    def get_last_attention(self, x):
+
+        x = self.prepare_tokens(x)
+        for idx, blk in enumerate(self.blocks3):
+            if self.gradient_checkpointing and self.training:
+                x, attn = self._gradient_checkpointing_func(
+                    blk.get_attention,
+                    x,
+                )
+            else:
+                x, attn = blk.get_attention(x)
+
+        x_norm = self.norm(x)
+
+        return ConvViTModelOutput(
+            x_norm_clstoken=x_norm[:, 0],
+            x_norm_regtokens=x_norm[:, 1 : self.num_register_tokens + 1],
+            x_norm_patchtokens=x_norm[:, self.num_register_tokens + 1:],
+            x_prenorm=x,
+            x_lastlayer_attn_cls=attn[:, :, :, 0],
+            x_lastlayer_attn_regtokens=attn[:, :, :, 1 : self.num_register_tokens + 1],
+            x_lastlayer_attn_patchtokens=attn[:, :, self.num_register_tokens + 1:],
+            x_lastlayer_attn_alltokens=attn,
         )
 
 
