@@ -84,7 +84,7 @@ python3 evaluation/knn.py --model-path {model_registry} \
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound | RSI-CB128 |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
 | ViT-S/16-e25 | 93.365 | 89.785 | 96.981 | 97.196 | 95.741 | 87.143 | 76.208 | 77.881 | 98.943 |
-| ConvViT-S-e25(DINOv1) | 92.508 | 91.935 |  | 98.131 |  |
+| ConvViT-S-e25(DINOv1) | 92.508 | 91.935 |  | 98.131 | 94.074 | 90.000 | 
 
 ---
 
