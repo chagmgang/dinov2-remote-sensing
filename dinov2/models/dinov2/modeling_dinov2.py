@@ -2,8 +2,10 @@ from typing import Callable, Optional, Tuple, Union, Dict, Any, List
 from dataclasses import dataclass
 from functools import partial
 
+import os
 import math
 import torch
+import warnings
 import torch.nn as nn
 from transformers import PreTrainedModel
 from transformers.file_utils import ModelOutput
@@ -18,6 +20,30 @@ from timm.models.layers import to_2tuple, trunc_normal_, DropPath
 
 from .configuration_dinov2 import DINOv2Config
 from .param_groups import get_params_groups_with_decay
+
+
+XFORMERS_ENABLED = os.environ.get("XFORMERS_DISABLED") is None
+try:
+    if XFORMERS_ENABLED:
+        from xformers.ops import memory_efficient_attention, unbind, fmha
+
+        COMPUTE_CAPA = torch.cuda.get_device_properties(0).major
+        
+        if COMPUTE_CAPA > 7:
+            OP=(fmha.flash.FwOp, fmha.flash.BwOp)
+            warnings.warn(f"Compute Capability is {COMPUTE_CAPA} -> Using Flash Attention")
+        else:
+            OP=(fmha.cutlass.FwOp, fmha.cutlass.BwOp)
+            warnings.warn(f"Compute Capability is {COMPUTE_CAPA} -> Using CUTLASS based Attention")
+
+        XFORMERS_AVAILABLE = True
+        warnings.warn("xFormers is available (Attention)")
+    else:
+        warnings.warn("xFormers is disabled (Attention)")
+        raise ImportError
+except ImportError:
+    XFORMERS_AVAILABLE = False
+    warnings.warn("xFormers is not available (Attention)")
 
 
 def drop_add_residual_stochastic_depth(
@@ -272,11 +298,23 @@ class Attention(nn.Module):
 
         q, k, v = qkv.unbind()
 
-        attn = (q @ k.transpose(-2, -1)) * self.scale
-        attn = attn.softmax(dim=-1)
-        x = (attn @ v).transpose(1, 2)
-
-        x = x.reshape(B, N, C)
+        if XFORMERS_AVAILABLE:
+            attn = memory_efficient_attention(
+                query=q.permute(0, 2, 1, 3),  # (batch_size, target_len,  num_heads,   head_dim)
+                key=k.permute(0, 2, 1, 3),    # (batch_size, target_len,  num_heads,   head_dim)
+                value=v.permute(0, 2, 1, 3),  # (batch_size, target_len,  num_heads,   head_dim)
+                attn_bias=None,
+                op=OP                         # depending on gpu computing capabaility (global variable)
+            )
+        
+        else:
+            q = q * self.scale
+            attn = q @ k.transpose(-2, -1)
+            attn = attn.softmax(dim=-1)
+            attn = self.attn_drop(attn)
+            attn = (attn @ v).transpose(1, 2)
+        
+        x = attn.reshape(B, N, C)
         x = self.proj(x)
         x = self.proj_drop(x)
         return x
