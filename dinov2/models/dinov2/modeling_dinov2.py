@@ -359,6 +359,27 @@ class SwiGLUFFN(nn.Module):
         return self.w3(hidden)
 
 
+class SwiGLUFFNFused(SwiGLUFFN):
+    def __init__(
+        self,
+        in_features: int,
+        hidden_features: Optional[int] = None,
+        out_features: Optional[int] = None,
+        act_layer: Callable[..., nn.Module] = None,
+        drop: float = 0.0,
+        bias: bool = True,
+    ) -> None:
+        out_features = out_features or in_features
+        hidden_features = hidden_features or in_features
+        hidden_features = (int(hidden_features * 2 / 3) + 7) // 8 * 8
+        super().__init__(
+            in_features=in_features,
+            hidden_features=hidden_features,
+            out_features=out_features,
+            bias=bias,
+        )
+
+
 class Mlp(nn.Module):
     def __init__(
         self,
@@ -543,6 +564,8 @@ class ViT(ViTPretrainedModel):
             ffn_layer = Mlp
         elif config.ffn_layer == 'swiglu':
             ffn_layer = SwiGLUFFN
+        elif config.ffn_layer == 'swiglufused':
+            ffn_layer = SwiGLUFFNFused
 
         blocks_list = [
             Block(
