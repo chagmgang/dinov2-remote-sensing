@@ -17,6 +17,7 @@ class DINOv2Config(PretrainedConfig):
         num_heads=12,
         qkv_bias=True,
         ffn_bias=True,
+        ffn_layer='mlp',
         proj_bias=True,
         drop_path_rate=0.3,
         drop_path_uniform=False,
@@ -64,6 +65,7 @@ class DINOv2Config(PretrainedConfig):
         self.num_heads = num_heads
         self.qkv_bias = qkv_bias
         self.ffn_bias = ffn_bias
+        self.ffn_layer = ffn_layer
         self.proj_bias = proj_bias
         self.drop_path_rate = drop_path_rate
         self.drop_path_uniform = drop_path_uniform
