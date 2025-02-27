@@ -33,6 +33,7 @@ deepspeed --include localhost:0,1,2,3... convvit_train.py
 | ViT-S/16-e25 | 25 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing/tensorboard) |
 | ViT-S/16-e100 | 25 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing-100ep) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing-100ep/tensorboard) |
 | ViT-B/16-e25 | 25 | 264M | 88M | 21M | 21M | [Link](https://huggingface.co/KevinCha/dinov2-vit-base-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-base-remote-sensing/tensorboard) |
+| ViT-L/14-e25 | 25 | 264M | 88M | 21M | 21M | [Link](https://huggingface.co/KevinCha/dinov2-vit-base-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-base-remote-sensing/tensorboard) |
 | ConvViT-S-e25(DINOv1) | 25 | 88.5M | 22.2M | 22M | x | [Link](https://huggingface.co/KevinCha/dinov2-conv-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-conv-vit-small-remote-sensing/tensorboard) |
 
 ---
@@ -86,12 +87,13 @@ python3 evaluation/knn.py --model-path {model_registry} \
 
 | Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound | RSI-CB128 |
 | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| Official ViT-S/14 | 87.778 | 85.484 | 91.820 | `99.065` | 92.074 | `91.429` | 73.936 | 74.068 | 96.504 |
-| Official ViT-B/14 | 90.571 | 89.247 | 91.948 | 96.262 | 90.667 | `92.857` | 74.721 | 75.847 | 96.585 |
-| ViT-S/16-e25 | 93.365 | 89.785 | 96.981 | 97.196 | `95.741` | 87.143 | `76.208` | `77.881` | `98.943` |
-| ViT-S/16-e100 | `93.746` | `94.624` | `97.081` | 97.196 | `96.222` | 86.667 | 75.960 | 76.695 | 98.808 |
-| ViT-B/16-e25 | `94.286` | 90.323 | `97.328` | `100.00` | 95.704 | 87.143 | `76.456` | `77.373` | `99.106` |
-| ConvViT-S-e25(DINOv1) | 92.508 | `91.935` | 95.947 | 98.131 | 94.074 | 90.000 | 75.630 | 76.271 | 98.374 |
+| Official ViT-S/14 | 87.778 | 85.484 | 91.820 | 99.065 | 92.074 | 91.429 | 73.936 | 74.068 | 96.504 |
+| Official ViT-B/14 | 90.571 | 89.247 | 91.948 | 96.262 | 90.667 | 92.857 | 74.721 | 75.847 | 96.585 |
+| ViT-S/16-e25 | 93.365 | 89.785 | 96.981 | 97.196 | 95.741 | 87.143 | 76.208 | 77.881 | 98.943 |
+| ViT-S/16-e100 | 93.746 | 94.624 | 97.081 | 97.196 | 96.222 | 86.667 | 75.960 | 76.695 | 98.808 |
+| ViT-B/16-e25 | 94.286 | 90.323 | 97.328 | 100.00 | 95.704 | 87.143 | 76.456 | 77.373 | 99.106 |
+| ViT-L/14-e25 | 1 | 91.398 | 3 | 99.065 | 5 | 88.095 | 7 | 8 | 9 |
+| ConvViT-S-e25(DINOv1) | 92.508 | 91.935 | 95.947 | 98.131 | 94.074 | 90.000 | 75.630 | 76.271 | 98.374 |
 
 ---
 
