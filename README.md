@@ -33,7 +33,7 @@ deepspeed --include localhost:0,1,2,3... convvit_train.py
 | ViT-S/16-e25 | 25 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing/tensorboard) |
 | ViT-S/16-e100 | 25 | 132M | 21M | 22M | 22M | [Link](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing-100ep) | [logs](https://huggingface.co/KevinCha/dinov2-vit-small-remote-sensing-100ep/tensorboard) |
 | ViT-B/16-e25 | 25 | 264M | 88M | 21M | 21M | [Link](https://huggingface.co/KevinCha/dinov2-vit-base-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-base-remote-sensing/tensorboard) |
-| ViT-L/14-e25 | 25 | 264M | 88M | 21M | 21M | [Link](https://huggingface.co/KevinCha/dinov2-vit-large-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-large-remote-sensing/tensorboard) |
+| ViT-L/14-e25 | 25 | - | - | - | - | [Link](https://huggingface.co/KevinCha/dinov2-vit-large-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-large-remote-sensing/tensorboard) |
 | ConvViT-S-e25(DINOv1) | 25 | 88.5M | 22.2M | 22M | x | [Link](https://huggingface.co/KevinCha/dinov2-conv-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-conv-vit-small-remote-sensing/tensorboard) |
 
 ---
