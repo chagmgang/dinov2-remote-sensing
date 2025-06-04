@@ -25,7 +25,7 @@ from .param_groups import get_params_groups_with_decay
 XFORMERS_ENABLED = os.environ.get("XFORMERS_DISABLED") is None
 try:
     if XFORMERS_ENABLED:
-        from xformers.ops import memory_efficient_attention, unbind, fmha
+        from xformers.ops import memory_efficient_attention, unbind, fmha, scaled_index_add, index_select_cat
 
         COMPUTE_CAPA = torch.cuda.get_device_properties(0).major
         
@@ -38,12 +38,15 @@ try:
 
         XFORMERS_AVAILABLE = True
         warnings.warn("xFormers is available (Attention)")
+        warnings.warn("xFormers is available (Block)")
     else:
         warnings.warn("xFormers is disabled (Attention)")
+        warnings.warn("xFormers is disabled (Block)")
         raise ImportError
 except ImportError:
     XFORMERS_AVAILABLE = False
     warnings.warn("xFormers is not available (Attention)")
+    warnings.warn("xFormers is not available (Block)")
 
 
 def drop_add_residual_stochastic_depth(
@@ -359,7 +362,20 @@ class SwiGLUFFN(nn.Module):
         return self.w3(hidden)
 
 
-class SwiGLUFFNFused(SwiGLUFFN):
+try:
+    if XFORMERS_AVAILABLE:
+        from xformers.ops import SwiGLU
+        warnings.warn("xFormers is available (SwiGLU)")
+    else:
+        warnings.warn("xFormers is disabled (SwiGLU)")
+        raise ImportError
+except ImportError:
+    SwiGLU = SwiGLUFFN
+
+    warnings.warn("xFormers is not available (SwiGLU)")
+
+
+class SwiGLUFFNFused(SwiGLU):
     def __init__(
         self,
         in_features: int,
