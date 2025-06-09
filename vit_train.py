@@ -15,6 +15,17 @@ from dinov2.models import DINOv2, DINOv2Config
 from dinov2.data import MaskingGenerator, DINOAugmentation, BaseDataset, collate_data_and_cast
 
 
+allowlist = [
+    np.core.multiarray._reconstruct,
+    np.core.multiarray.scalar,
+    np.ndarray,
+    np.dtype,
+    type(np.dtype(np.float64)),
+    type(np.dtype(np.uint32)),
+]
+
+torch.serialization.add_safe_globals(allowlist)
+
 
 class CosineScheduler(object):
     def __init__(self, base_value, final_value, total_iters, warmup_iters=0, start_warmup_value=0, freeze_iters=0):
