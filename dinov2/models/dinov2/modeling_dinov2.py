@@ -307,7 +307,7 @@ class Attention(nn.Module):
                 key=k.permute(0, 2, 1, 3),    # (batch_size, target_len,  num_heads,   head_dim)
                 value=v.permute(0, 2, 1, 3),  # (batch_size, target_len,  num_heads,   head_dim)
                 attn_bias=None,
-                op=OP                         # depending on gpu computing capabaility (global variable)
+                # op=OP                         # depending on gpu computing capabaility (global variable)
             )
         
         else:
