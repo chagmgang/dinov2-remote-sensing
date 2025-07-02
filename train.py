@@ -46,7 +46,7 @@ def main():
 
     filenames = list()
     for filename in [
-        '/nas/k8s/dev/mlops/chagmgang/dinov2_corpus/corpus/Million-AID.txt',
+        'data_lists/test.txt',
     ]:
         filenames.extend(read_filename(filename))
 
