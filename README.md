@@ -9,12 +9,9 @@
 ---
 ## Training
 
-This project use the deepspeed interface for multi gpu training
+This project use the deepspeed interface for multi gpu training with DeepSpeed Zero Stage 3
 ```
-deepspeed --include localhost:0,1,2,3... vit_train.py
-```
-```
-deepspeed --include localhost:0,1,2,3... convvit_train.py
+deepspeed --include localhost:0,1,2,3,4,5,6,7 train.py --deepspeed --deepspeed_config ds_config/ds_z3.json --model-path {model_path} --batch-size {total_batch_size}
 ```
 
 ---

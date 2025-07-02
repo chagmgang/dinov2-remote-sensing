@@ -100,3 +100,4 @@ class DINOv2Config(PretrainedConfig):
         self.teacher_temp_warmup_percentile = teacher_temp_warmup_percentile
         self.warmup_teacher_temp = warmup_teacher_temp
         self.clip_grad = clip_grad
+        self.hidden_size = embed_dim

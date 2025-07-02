@@ -196,6 +196,12 @@ class DINOHead(nn.Module):
         self.apply(self._init_weights)
         self.last_layer = nn.Linear(bottleneck_dim, out_dim, bias=False)
 
+    def _initialize_weights(self, module):
+        if getattr(module, "_is_hf_initialized", False):
+            return
+        self._init_weights(module)
+        module._is_hf_initialized = True
+
     def _init_weights(self, m):
         if isinstance(m, nn.Linear):
             trunc_normal_(m.weight, std=0.02)
