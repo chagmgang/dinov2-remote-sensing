@@ -32,7 +32,6 @@ deepspeed --include localhost:0,1,2,3,4,5,6,7 train.py --deepspeed --deepspeed_c
 | ViT-B/16-e25 | 25 | 264M | 88M | 21M | 21M | [Link](https://huggingface.co/KevinCha/dinov2-vit-base-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-base-remote-sensing/tensorboard) |
 | ViT-L/14-e25 | 25 | 837M | 303M | 57M | 57M | [Link](https://huggingface.co/KevinCha/dinov2-vit-large-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-vit-large-remote-sensing/tensorboard) |
 | ViT-L/14-e50 | 50 | 837M | 303M | 57M | 57M | [Link](https://huggingface.co/KevinCha/dinov2-vit-large-remote-sensing-50ep) | [logs](https://huggingface.co/KevinCha/dinov2-vit-large-remote-sensing-50ep/tensorboard) |
-| ConvViT-S-e25(DINOv1) | 25 | 88.5M | 22.2M | 22M | x | [Link](https://huggingface.co/KevinCha/dinov2-conv-vit-small-remote-sensing) | [logs](https://huggingface.co/KevinCha/dinov2-conv-vit-small-remote-sensing/tensorboard) |
 
 ---
 
@@ -64,14 +63,13 @@ python3 evaluation/linprob.py --model-path {model_registry} \
                               --test-text {test_textfile}
 ```
 
-| Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound | RSI-CB128 |
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| ViT-S/16-e25 | 94.381 | 96.237 | 96.642 | 99.811 | 98.037 | 99.048 | 77.613 | 78.644 | 99.593 |
-| ViT-S/16-e100 | 94.381 | 95.161 | 96.349 | 100.00 | 97.704 | 99.048 | 76.910 | 79.407 | 99.539 |
-| ViT-B/16-e25 | 95.460 | 98.925 | 97.301 | 100.00 | 97.889 | 98.571 | 79.058 | 80.339 | 99.675 |
-| ViT-L/14-e25 | 96.603 | 96.774 | 98.161 | 100.000 | 98.704 | 99.048 | 80.132 | 82.627 | 99.729 |
-| ViT-L/14-e50 | 96.762 | 96.774 | 97.511 | 100.00 | 98.407 | 98.571 | 80.463 | 85.508 | 99.702 |
-| ConvViT-S-e25(DINOv1) | 94.476 | 93.548 | 95.919 | 99.065 | 96.778 | 98.095 | 77.695 | 81.949 | 99.295 |
+| Model | RESISC | Optimal 31 | MLRSNet | WHU-RS19 | EuroSAT | UC Merced | Cv-BrCT | AiRound | RSI-CB128 | Avg |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| ViT-S/16-e25 | 94.381 | 96.237 | 96.642 | 99.811 | 98.037 | 99.048 | 77.613 | 78.644 | 99.593 | 93.334 |
+| ViT-S/16-e100 | 94.381 | 95.161 | 96.349 | 100.00 | 97.704 | 99.048 | 76.910 | 79.407 | 99.539 | 93.167 |
+| ViT-B/16-e25 | 95.460 | 98.925 | 97.301 | 100.00 | 97.889 | 98.571 | 79.058 | 80.339 | 99.675 | 94.135 |
+| ViT-L/14-e25 | 96.603 | 96.774 | 98.161 | 100.000 | 98.704 | 99.048 | 80.132 | 82.627 | 99.729 | 94.642 |
+| ViT-L/14-e50 | 96.762 | 96.774 | 97.511 | 100.00 | 98.407 | 98.571 | 80.463 | 85.508 | 99.702 | 94.855 |
 
 ### KNN Evaluation
 
