@@ -85,23 +85,23 @@ class DINOv2Trainer(Trainer):
             warmup_iters=int(self.model.config.lr_warmup_percentile * self.state.max_steps),
         )
 
-        log_params = dict()
-        log_params['momentum'] = momentum
-        log_params['teacher_temp'] = teacher_temp
+        if self.state.global_step % self.args.logging_steps == 0:
+            log_params = dict()
+            log_params['momentum'] = momentum
+            log_params['teacher_temp'] = teacher_temp
 
-        for param_group in self.optimizer.param_groups:
-            is_last_layer = param_group['is_last_layer']
-            lr_multiplier = param_group["lr_multiplier"]
-            wd_multiplier = param_group["wd_multiplier"]
-            param_group["weight_decay"] = wd * wd_multiplier
-            param_group["lr"] = (last_layer_lr if is_last_layer else lr) * lr_multiplier
-            name = param_group['name']
-            log_params.update({
-                f'{name}.lr': param_group['lr'],
-                f'{name}.wd': param_group['weight_decay'],
-            })
-        
-        self.log(log_params)
+            for param_group in self.optimizer.param_groups:
+                is_last_layer = param_group['is_last_layer']
+                lr_multiplier = param_group["lr_multiplier"]
+                wd_multiplier = param_group["wd_multiplier"]
+                param_group["weight_decay"] = wd * wd_multiplier
+                param_group["lr"] = (last_layer_lr if is_last_layer else lr) * lr_multiplier
+                log_params.update({
+                    f'lr': param_group['lr'],
+                    f'wd': param_group['weight_decay'],
+                })
+
+            self.log(log_params)
 
         inputs['teacher_temp'] = teacher_temp
         ret = super(DINOv2Trainer, self).training_step(
@@ -129,10 +129,11 @@ class DINOv2Trainer(Trainer):
             num_items_in_batch=num_items_in_batch,
         )
 
-        log_params = dict()
-        loss_dict = dict(outputs.loss_dict)
-        for key in loss_dict.keys():
-            log_params[key] = float(loss_dict[key])
-
-        self.log(log_params)
+        if self.state.global_step % self.args.logging_steps == 0:
+            log_params = dict()
+            loss_dict = dict(outputs.loss_dict)
+            for key in loss_dict.keys():
+                log_params[key] = float(loss_dict[key])
+                
+            self.log(log_params)
         return loss
