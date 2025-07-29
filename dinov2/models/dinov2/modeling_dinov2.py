@@ -179,14 +179,6 @@ def _build_mlp(nlayers, in_dim, bottleneck_dim, hidden_dim=None, use_bn=False, b
         return nn.Sequential(*layers)
 
 
-def autocast_off(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        with torch.amp.autocast('cuda', enabled=False):
-            return func(*args, **kwargs)
-    return wrapper
-
-
 class DINOHead(nn.Module):
     def __init__(
         self,
@@ -216,25 +208,11 @@ class DINOHead(nn.Module):
             if isinstance(m, nn.Linear) and m.bias is not None:
                 nn.init.constant_(m.bias, 0)
 
-    @autocast_off
     def forward(self, x):
-        x = x.to(torch.float32)
-        for mlp in self.mlp:
-            if isinstance(mlp, nn.Linear):
-                x = F.linear(
-                    x,
-                    mlp.weight.to(x.dtype),
-                    mlp.bias.to(x.dtype),
-                )
-            else:
-                x = mlp(x)
+        x = self.mlp(x)
         eps = 1e-6 if x.dtype == torch.float16 else 1e-12
         x = nn.functional.normalize(x, dim=-1, p=2, eps=eps)
-        x = F.linear(
-            x,
-            self.last_layer.weight.to(x.dtype),
-            self.last_layer.bias,
-        )
+        x = self.last_layer(x)
         return x
 
 
@@ -872,7 +850,6 @@ class KoLeoLoss(nn.Module):
             student_output (BxD): backbone output of student
         """
         with torch.cuda.amp.autocast(enabled=False):
-            student_output = student_output.to(torch.float32)
             student_output = F.normalize(student_output, eps=eps, p=2, dim=-1)
             I = self.pairwise_NNs_inner(student_output)  # noqa: E741
             distances = self.pdist(student_output, student_output[I])  # BxD, BxD -> B
